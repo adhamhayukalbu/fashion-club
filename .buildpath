@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="backend/models"/>
+	<buildpathentry kind="src" path="backend/views"/>
+	<buildpathentry kind="src" path="backend/web"/>
+	<buildpathentry kind="src" path="vendors/bootstrap-wysiwyg/examples/php"/>
+	<buildpathentry kind="src" path="vendors/jQuery-Smart-Wizard/more_examples"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>

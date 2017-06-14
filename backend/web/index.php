@@ -10,11 +10,15 @@
     
     if(isset($_POST['submit-save'])){
         include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/models/process.php");
-        $id = $_POST['id'];
+        $mode = $_POST['mode'];
         $model = $_POST['model'];
-        if (!$id){
+//         echo $mode;
+        if ($mode == 'new'){
+//             echo "CREATE";
             create($model, $connected);
-        }else{
+        }else if($mode == 'edit'){
+//             echo "WRITE";
+            $id = $_POST['id'];
             write($id, $model, $connected);
         }
         

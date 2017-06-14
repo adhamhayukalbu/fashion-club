@@ -40,8 +40,8 @@
                                     <th class="column-title">Product Type</th>
                                     <th class="column-title">Visible in Website</th>
                                     <th class="column-title">Action</th>
-                    				<th class="bulk-actions" colspan="7">
-                      					<a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                    				<th class="bulk-actions" colspan="8">
+                      					<a class="antoo" style="color:#fff; font-weight:500;">Batch Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
                     				</th>
                   				</tr>
                 			</thead>

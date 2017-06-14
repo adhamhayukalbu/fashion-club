@@ -19,7 +19,7 @@
                 $description_sale = $_POST['description_sale'];
                 $description_picking = $_POST['description_picking'];
 
-                $sql = "INSERT INTO product_template VALUES (NULL, 1, NULL, NULL, NULL, '$name', NULL, '$list_price', '$standard_price', '$categ_id', '$sale_ok', '$purchase_ok', $description_sale, '$product_type_id', NULL, 1, '$website_published', '$default_code')";
+                $sql = "INSERT INTO product_template VALUES (NULL, 1, NULL, NULL, NULL, '$name', NULL, '$list_price', '$standard_price', '$categ_id', '$sale_ok', '$purchase_ok', '$description_sale', '$product_type_id', NULL, 1, '$website_published', '$default_code')";
                 $result = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
             }
         }

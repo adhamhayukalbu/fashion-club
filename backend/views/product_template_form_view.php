@@ -1,4 +1,7 @@
-<?php
+<?php 
+    if(isset($_GET['mode'])){
+        $mode = $_GET['mode'];
+    }
     if(isset($_GET['id'])){
         $user = "root";
         $pass = "";
@@ -43,6 +46,7 @@
           		<br/>
   				<form enctype="multipart/form-data" action="../web/index.php" method="post" id="product-form-view" class="form-horizontal form-label-left">          		
           			<input type="hidden" name="id" value="<?php echo $id; ?>">
+          			<input type="hidden" name="mode" value="<?php echo $mode; ?>">
           			<input type="hidden" name="model" value="product_template">
           			<div class="row">
           				<div class="col-md-12 col-sm-12 col-xs-12">
@@ -281,7 +285,6 @@
                       	</div>
             		</div>
               		<div class="ln_solid"></div>
-              		<input id="product-form-button-submit" name="submit-save" type="submit" style="display:none;" class="btn btn-success">
               	</form>
     		</div>
 		</div>
