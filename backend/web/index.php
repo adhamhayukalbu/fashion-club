@@ -15,10 +15,22 @@
 //         echo $mode;
         if ($mode == 'new'){
 //             echo "CREATE";
+            $imgFile = $_FILES['uploaded-file']['name'];
+            $tmp_dir = $_FILES['uploaded-file']['tmp_name'];
+            $imgSize = $_FILES['uploaded-file']['size'];
+            $upload_dir = '../images/'; // upload directory
+            $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION));
+            move_uploaded_file($tmp_dir, $upload_dir.$imgFile);
             create($model, $connected);
         }else if($mode == 'edit'){
 //             echo "WRITE";
             $id = $_POST['id'];
+            $imgFile = $_FILES['uploaded-file']['name'];
+            $tmp_dir = $_FILES['uploaded-file']['tmp_name'];
+            $imgSize = $_FILES['uploaded-file']['size'];
+            $upload_dir = '../images/'; // upload directory
+            $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION));
+            move_uploaded_file($tmp_dir, $upload_dir.$imgFile);
             write($id, $model, $connected);
         }
         
@@ -278,6 +290,19 @@
         	    $("#product-tree-button-submit").click();
     	    });
     	});
+	    function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+
+	            reader.onload = function (e) {
+	                $('#image-product-primary')
+	                    .attr('src', e.target.result)
+	                    .width(150)
+	                    .height(200);
+	            };
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
 	</script>
   </body>
 </html>

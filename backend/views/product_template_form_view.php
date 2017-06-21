@@ -52,9 +52,9 @@
           				<div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-4 col-sm-4 col-xs-12">
                       			<div class="thumb-image img-thumbnail rounded float-right">
-                                	<img width="272" height="256" id="image" src="../images/wanita5_1.jpg" alt="Picture">
+                                	<img width="272" height="256" id="image-product-primary" src="../images/<?php echo $data['image']?>" alt="Picture">
                               	</div>
-                         		<input type="file" name="uploaded-file" id="demo-fileInput-lesson-one">                             	
+                         		<input type="file" onchange="readURL(this);" name="uploaded-file" id="demo-fileInput-lesson-one">                             	
                             </div>
 	                        <div class="col-md-8 col-sm-8 col-xs-12">
                       			<div class="form-group">
@@ -188,9 +188,9 @@
           				<div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-4 col-sm-4 col-xs-12">
                       			<div class="thumb-image img-thumbnail rounded float-right">
-                                	<img width="272" height="256" id="image" src="../images/wanita5_1.jpg" alt="Picture">
+                                	<img width="272" height="256" id="image" src="../images/<?php echo $data['image']?>" alt="Picture">
                               	</div>
-                         		<input type="file" name="uploaded-file" id="demo-fileInput-lesson-one">                             	
+                         		<input disabled="disabled" type="file" name="uploaded-file" id="demo-fileInput-lesson-one">                             	
                             </div>
 	                        <div class="col-md-8 col-sm-8 col-xs-12">
                       			<div class="form-group">

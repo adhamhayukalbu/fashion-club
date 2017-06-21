@@ -18,8 +18,8 @@
                 $default_code = $_POST['default_code'];
                 $description_sale = $_POST['description_sale'];
                 $description_picking = $_POST['description_picking'];
-
-                $sql = "INSERT INTO product_template VALUES (NULL, 1, NULL, NULL, NULL, '$name', NULL, '$list_price', '$standard_price', '$categ_id', '$sale_ok', '$purchase_ok', '$description_sale', '$product_type_id', NULL, 1, '$website_published', '$default_code')";
+                $images = $_FILES['uploaded-file']['name'];
+                $sql = "INSERT INTO product_template VALUES (NULL, 1, NULL, NULL, NULL, '$name', NULL, '$list_price', '$standard_price', '$categ_id', '$sale_ok', '$purchase_ok', '$description_sale', '$product_type_id', NULL, 1, '$website_published', '$default_code', '$images')";
                 $result = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
             }
         }
@@ -44,9 +44,10 @@
                 $default_code = $_POST['default_code'];
                 $description_sale = $_POST['description_sale'];
                 $description_picking = $_POST['description_picking'];
+                $images = $_FILES['uploaded-file']['name'];
 
-                $sql = "UPDATE product_template SET name='$name', list_price='$list_price', standard_price='$standard_price', categ_id='$categ_id', product_type_id='$product_type_id', sale_ok='$sale_ok', purchase_ok='$purchase_ok', description_sale='$description_sale', website_published='$website_published', default_code='$default_code' WHERE id='$id'";
-                $result = mysqli_query($koneksi, $sql) or die(mysqli_error());
+                $sql = "UPDATE product_template SET name='$name', list_price='$list_price', standard_price='$standard_price', categ_id='$categ_id', product_type_id='$product_type_id', sale_ok='$sale_ok', purchase_ok='$purchase_ok', description_sale='$description_sale', website_published='$website_published', default_code='$default_code', image='$images' WHERE id='$id'";
+                $result = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
             }
         }
     }
