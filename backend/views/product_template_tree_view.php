@@ -12,10 +12,10 @@
           			<li class="dropdown">
             			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
             			<ul class="dropdown-menu" role="menu">
-              				<li><a href="#">Published</a></li>
-              				<li><a href="#">Unpublished</a></li>
+              				<li><a id="action_published" href="#">Published</a></li>
+              				<li><a id="action_unpublished" href="#">Unpublished</a></li>
               				<li class="divider"></li>
-              				<li><a id="delete_multi" href="#">Delete</a></li>
+              				<li><a id="action_delete" href="#">Delete</a></li>
             			</ul>
           			</li>
           			<li><a class="close-link"><i class="fa fa-close"></i></a></li>
@@ -26,7 +26,7 @@
         		<div class="table-responsive">
 	  				<form action="../web/index.php" method="post" id="product-tree-view" class="form-horizontal form-label-left">          		        			
               			<input type="hidden" name="model" value="product_template">
-              			<table id="datatable-buttons" class="table table-striped jambo_table bulk_action">
+              			<table id="product-template-table" class="table table-striped jambo_table bulk_action">
                 			<thead>
                   				<tr class="headings">
                     				<th>
@@ -73,9 +73,15 @@
                                         echo '<td> Rp. '.number_format($data['standard_price'], 2).'</td>';
                                         echo '<td>'.$data['categ_id_display_name'].'</td>';
                                         echo '<td class="a-right a-right">'.$data['product_type_id_name'].'</td>';
-                                        echo '<td class="a-right a-right">
-                                                <input disabled="disabledd" checked="1" type="checkbox" class="flat" name="website_published"/>
+                                        if(!$data['website_published']){
+                                            echo '<td class="a-right a-right">
+                                                <input disabled="disabled" type="checkbox" class="flat" name="website_published"/>
                                              </td>';
+                                        }else{
+                                            echo '<td class="a-right a-right">
+                                                <input disabled="disabled" checked="1" type="checkbox" class="flat" name="website_published"/>
+                                             </td>';
+                                        }
                                         echo '<td class="a-center">
                                                 <a href="?mode=read&view_type=form-view&model=product_template&id='.$data['id'].'">View</a>
                                              </td>';
@@ -87,6 +93,8 @@
                             </tbody>
               			</table>
 	              		<input id="product-tree-button-submit" name="submit-delete" type="submit" style="display:none;" class="btn btn-success">              			
+	              		<input id="product-tree-button-submit" name="submit-published" type="submit" style="display:none;" class="btn btn-success">              			
+	              		<input id="product-tree-button-submit" name="submit-unpublished" type="submit" style="display:none;" class="btn btn-success">              			
           			</form>
         		</div>
       		</div>

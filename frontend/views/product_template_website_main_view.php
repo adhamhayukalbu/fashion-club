@@ -4,7 +4,7 @@
     <div class="banner-bootom-w3-agileits">
     	<div class="container">
     		<div class="col-md-5 bb-grids bb-left-agileits-w3layouts">
-    			<a href="?mode=read&view_type=kanban-view&model=product_template&categ_id=1">
+    			<a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=2">
     				<div class="bb-left-agileits-w3layouts-inner">
     					<h3>Koleksi</h3>
     					<h4><span> Pakaian Wanita </span></h4>
@@ -12,13 +12,13 @@
     			</a>
     		</div>
     		<div class="col-md-4 bb-grids bb-middle-agileits-w3layouts">
-    			<a href="../lesson_web_mobile/content/wanita/sepatu/index.php">
+    			<a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=3">
     				<div class="bb-middle-top">
     					<h3>Koleksi</h3>
     					<h4><span>Sepatu Wanita</span></h4>
     				</div>
     			</a>
-    			<a href="../lesson_web_mobile/content/pria/jam_tangan/index.php">
+    			<a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=4">
     				<div class="bb-middle-bottom">
     					<h3>Koleksi</h3>
     					<h4><span>Jam Tangan Pria</span></h4>
@@ -26,13 +26,13 @@
     			</a>
     		</div>
     		<div class="col-md-3 bb-grids bb-right-agileits-w3layouts">
-    			<a href="../lesson_web_mobile/content/wanita/aksesoris/index.php">
+    			<a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=5">
     				<div class="bb-right-top">
     					<h3>Koleksi</h3>
     					<h4><span>Aksesoris Wanita</span></h4>
     				</div>
     			</a>
-    			<a href="../lesson_web_mobile/content/wanita/tas/index.php">
+    			<a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=6">
     				<div class="bb-right-bottom">
     					<h3>Koleksi</h3>
     					<h4><span>Tas Wanita</span></h4>
@@ -43,8 +43,7 @@
     	</div>
     </div>
 
-    <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-    <script type="text/javascript">
+    <script src="../static/src/js/easyResponsiveTabs.js" type="text/javascript">
     	$(document).ready(function () {
     		$('#horizontalTab').easyResponsiveTabs({
     			type: 'default', //Types: default, vertical, accordion           
@@ -53,6 +52,7 @@
     		});
     	});
     </script>
+
     <div class="fandt">
     	<div class="container">
     		<div class="col-md-6 features">
@@ -119,8 +119,7 @@
     		</div>
     		<div class="clearfix"></div>
     	</div>
-    	<script src="../lesson_web_mobile/static/src/js/jquery.wmuSlider.js"></script> 
-    	<script>
+    	<script src="../static/src/js/jquery.wmuSlider.js" type="text/javascript">
     		$('.testimonial_slide_id').wmuSlider();         
     	</script> 
     </div>

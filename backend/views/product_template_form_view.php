@@ -10,9 +10,10 @@
         $connected = connect_to_db($host, $user, $pass, $db);
 
         $id = $_GET['id'];
+        $model = $_GET['model'];
         $query = mysqli_query($connected, "SELECT * FROM product_template WHERE id='$id'") or die(mysqli_error($connected));
     
-        if(mysqli_num_rows($query) == 0){
+        if(mysqli_num_rows($query) == 0 && $model == 'product_template'){
             echo '<script>window.history.back()</script>';
         }else{
             $data = mysqli_fetch_assoc($query);
@@ -50,11 +51,22 @@
           			<input type="hidden" name="model" value="product_template">
           			<div class="row">
           				<div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="col-md-4 col-sm-4 col-xs-12">
-                      			<div class="thumb-image img-thumbnail rounded float-right">
-                                	<img width="272" height="256" id="image-product-primary" src="../images/<?php echo $data['image']?>" alt="Picture">
-                              	</div>
-                         		<input type="file" onchange="readURL(this);" name="uploaded-file" id="demo-fileInput-lesson-one">                             	
+							<div class="col-md-4 col-sm-4 col-xs-12">
+    	                        <div class="thumbnail">
+    	                          <span class="label label-primary">Primary Image</span>
+                                  <div class="image view view-first">
+                                    <img style="width: 100%; display: block;" src="../images/<?php echo $data['image']?>" alt="image" />
+                                    <div class="mask">
+                                      <p><?php echo $data['name']; ?></p>
+                                      <div class="tools tools-bottom">
+                                        <a href="#"><i class="fa fa-link"></i></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="caption">
+                                    <p><input type="file" name="image" id="demo-fileInput-lesson-one"></p>
+                                  </div>
+                                </div>
                             </div>
 	                        <div class="col-md-8 col-sm-8 col-xs-12">
                       			<div class="form-group">
@@ -77,7 +89,60 @@
                                     	</label>
                                   	</div>
                           		</div> 
-                          		                        
+                                <div class="col-md-12">
+                                	<h4>Optional Images</h4>
+                              		<div class="col-md-4">
+                                  		<div class="thumbnail">
+            	                          <span class="label label-default">Optional 2nd Image</span>
+                                          <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="../images/<?php echo $data['optional_image_2']?>" alt="image" />
+                                            <div class="mask">
+                                              <p><?php echo $data['name']; ?></p>
+                                              <div class="tools tools-bottom">
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="caption">
+                                            <p><input type="file" name="optional_image_2" id="demo-fileInput-lesson-one"></p>
+                                          </div>
+                                        </div>
+                              		</div>
+                              		<div class="col-md-4">                        		
+                                  		<div class="thumbnail">
+            	                          <span class="label label-default">Optional 3rd Image</span>
+                                          <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="../images/<?php echo $data['optional_image_3']?>" alt="image" />
+                                            <div class="mask">
+                                              <p><?php echo $data['name']; ?></p>
+                                              <div class="tools tools-bottom">
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="caption">
+                                            <p><input type="file" name="optional_image_3" id="demo-fileInput-lesson-one"></p>
+                                          </div>
+                                        </div>
+                              		</div>
+                              		<div class="col-md-4">                        		
+                                  		<div class="thumbnail">
+            	                          <span class="label label-default">Optional 4th Image</span>
+                                          <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="../images/<?php echo $data['optional_image_4']?>" alt="image" />
+                                            <div class="mask">
+                                              <p><?php echo $data['name']; ?></p>
+                                              <div class="tools tools-bottom">
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="caption">
+                                            <p><input type="file" name="optional_image_4" id="demo-fileInput-lesson-one"></p>
+                                          </div>
+                                        </div>
+                              		</div> 
+                                </div>                         		                        
                         	</div>
           				</div>
           			</div>
@@ -187,10 +252,21 @@
           			<div class="row">
           				<div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="col-md-4 col-sm-4 col-xs-12">
-                      			<div class="thumb-image img-thumbnail rounded float-right">
-                                	<img width="272" height="256" id="image" src="../images/<?php echo $data['image']?>" alt="Picture">
-                              	</div>
-                         		<input disabled="disabled" type="file" name="uploaded-file" id="demo-fileInput-lesson-one">                             	
+    	                        <div class="thumbnail">
+    	                          <span class="label label-primary">Primary Image</span>
+                                  <div class="image view view-first">
+                                    <img style="width: 100%; display: block;" src="../images/<?php echo $data['image']?>" alt="image" />
+                                    <div class="mask">
+                                      <p><?php echo $data['name']; ?></p>
+                                      <div class="tools tools-bottom">
+                                        <a href="#"><i class="fa fa-link"></i></a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="caption">
+                                    <p><input disabled="disabled" type="file" name="uploaded-file" id="demo-fileInput-lesson-one"></p>
+                                  </div>
+                                </div>
                             </div>
 	                        <div class="col-md-8 col-sm-8 col-xs-12">
                       			<div class="form-group">
@@ -212,8 +288,61 @@
                                       		<input disabled="disabled" type="checkbox" name="website_published" class="flat" checked="<?php echo $data['website_published']; ?>"> &nbsp; <strong> Published on Website </strong>
                                     	</label>
                                   	</div>
-                          		</div> 
-                          		                        
+                          		</div>                        		
+                                <div class="col-md-12">
+                                	<h4>Optional Images</h4>
+                              		<div class="col-md-4">
+                                  		<div class="thumbnail">
+            	                          <span class="label label-default">Optional 2nd Image</span>
+                                          <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="../images/<?php echo $data['optional_image_2']?>" alt="image" />
+                                            <div class="mask">
+                                              <p><?php echo $data['name']; ?></p>
+                                              <div class="tools tools-bottom">
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="caption">
+                                            <p><input disabled="disabled" type="file" name="uploaded-file" id="demo-fileInput-lesson-one"></p>
+                                          </div>
+                                        </div>
+                              		</div>
+                              		<div class="col-md-4">                        		
+                                  		<div class="thumbnail">
+            	                          <span class="label label-default">Optional 3rd Image</span>
+                                          <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="../images/<?php echo $data['optional_image_3']?>" alt="image" />
+                                            <div class="mask">
+                                              <p><?php echo $data['name']; ?></p>
+                                              <div class="tools tools-bottom">
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="caption">
+                                            <p><input disabled="disabled" type="file" name="uploaded-file" id="demo-fileInput-lesson-one"></p>
+                                          </div>
+                                        </div>
+                              		</div>
+                              		<div class="col-md-4">                        		
+                                  		<div class="thumbnail">
+            	                          <span class="label label-default">Optional 4th Image</span>
+                                          <div class="image view view-first">
+                                            <img style="width: 100%; display: block;" src="../images/<?php echo $data['optional_image_4']?>" alt="image" />
+                                            <div class="mask">
+                                              <p><?php echo $data['name']; ?></p>
+                                              <div class="tools tools-bottom">
+                                                <a href="#"><i class="fa fa-link"></i></a>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="caption">
+                                            <p><input disabled="disabled" type="file" name="uploaded-file" id="demo-fileInput-lesson-one"></p>
+                                          </div>
+                                        </div>
+                              		</div> 
+                                </div>                      		                        
                         	</div>
           				</div>
           			</div>

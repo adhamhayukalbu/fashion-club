@@ -12,25 +12,46 @@
         include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/models/process.php");
         $mode = $_POST['mode'];
         $model = $_POST['model'];
-//         echo $mode;
         if ($mode == 'new'){
-//             echo "CREATE";
-            $imgFile = $_FILES['uploaded-file']['name'];
-            $tmp_dir = $_FILES['uploaded-file']['tmp_name'];
-            $imgSize = $_FILES['uploaded-file']['size'];
+            /* Main Image */
+            $imgFile = $_FILES['image']['name'];
+            $tmp_dir = $_FILES['image']['tmp_name'];
+            
+            /* Optional Images */
+            $optimgFile2 = $_FILES['optional_image_2']['name'];
+            $tmp_dir_2 = $_FILES['optional_image_2']['tmp_name'];
+            $optimgFile3 = $_FILES['optional_image_3']['name'];
+            $tmp_dir_3 = $_FILES['optional_image_3']['tmp_name'];
+            $optimgFile4 = $_FILES['optional_image_4']['name'];
+            $tmp_dir_4 = $_FILES['optional_image_4']['tmp_name'];
+            
             $upload_dir = '../images/'; // upload directory
-            $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION));
+            
             move_uploaded_file($tmp_dir, $upload_dir.$imgFile);
+            move_uploaded_file($tmp_dir_2, $upload_dir.$optimgFile2);
+            move_uploaded_file($tmp_dir_3, $upload_dir.$optimgFile3);
+            move_uploaded_file($tmp_dir_4, $upload_dir.$optimgFile4);
             create($model, $connected);
         }else if($mode == 'edit'){
-//             echo "WRITE";
             $id = $_POST['id'];
-            $imgFile = $_FILES['uploaded-file']['name'];
-            $tmp_dir = $_FILES['uploaded-file']['tmp_name'];
-            $imgSize = $_FILES['uploaded-file']['size'];
+            /* Main Image */
+            $imgFile = $_FILES['image']['name'];
+            $tmp_dir = $_FILES['image']['tmp_name'];
+            
+            /* Optional Images */
+            $optimgFile2 = $_FILES['optional_image_2']['name'];
+            $tmp_dir_2 = $_FILES['optional_image_2']['tmp_name'];
+            $optimgFile3 = $_FILES['optional_image_3']['name'];
+            $tmp_dir_3 = $_FILES['optional_image_3']['tmp_name'];
+            $optimgFile4 = $_FILES['optional_image_4']['name'];
+            $tmp_dir_4 = $_FILES['optional_image_4']['tmp_name'];
+ 
             $upload_dir = '../images/'; // upload directory
-            $imgExt = strtolower(pathinfo($imgFile, PATHINFO_EXTENSION));
+
             move_uploaded_file($tmp_dir, $upload_dir.$imgFile);
+            move_uploaded_file($tmp_dir_2, $upload_dir.$optimgFile2);
+            move_uploaded_file($tmp_dir_3, $upload_dir.$optimgFile3);
+            move_uploaded_file($tmp_dir_4, $upload_dir.$optimgFile4);
             write($id, $model, $connected);
         }
         
@@ -42,6 +63,22 @@
             $id = $_POST['table_records'][$i];
             delete($id, $model, $connected);
         }      
+    }
+    if(isset($_POST['submit-published'])){
+        include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/models/process.php");
+        $model = $_POST['model'];
+        for($i = 0; $i < count($_POST['table_records']); $i++){
+            $id = $_POST['table_records'][$i];
+            published($id, $model, $connected);
+        }
+    }
+    if(isset($_POST['submit-unpublished'])){
+        include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/models/process.php");
+        $model = $_POST['model'];
+        for($i = 0; $i < count($_POST['table_records']); $i++){
+            $id = $_POST['table_records'][$i];
+            unpublished($id, $model, $connected);
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -115,15 +152,16 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-bar-chart-o"></i> Sales <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="index.php?view_type=tree_view&model=product_template">Products</a></li>
+                      <li><a href="index.php?view_type=tree-view&model=product_template">Products</a></li>
+                      <li><a href="index.php?view_type=tree-view&model=sale_order">Sales Orders</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-cog"></i> Configuration <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a>Products<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                           	<li><a href="index.php?view_type=tree_view&model=product_category">Product Categories</a></li>
-                            <li><a href="index.php?view_type=tree_view&model=product_uom">Unit of Measure Categories</a></li>
+                           	<li><a href="index.php?view_type=tree-view&model=product_category">Product Categories</a></li>
+                            <li><a href="index.php?view_type=tree-view&model=product_uom">Unit of Measure Categories</a></li>
                           </ul>
                       </li>
                     </ul>
@@ -163,9 +201,11 @@
         <!-- page content -->
         <div class="right_col" role="main">
             <?php
-                /* Import Product Template Tree View & Product Template Form View */
+                /* Import Resource View : Product Template, Sale Order Form & Tree View */
                 include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/views/product_template_tree_view.php");
                 include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/views/product_template_form_view.php");
+                include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/views/sale_order_tree_view.php");
+                include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/backend/views/sale_order_form_view.php");
             ?>
             </div>
       	</div>
@@ -240,6 +280,26 @@
     	$(document).ready(function(){
     	    $("#product-template-form-view[mode='read']").hide();
     	    $("#product-template-form-view[mode='create-edit']").hide();
+//     	    $("#sale-order-tree-view").hide();
+    	    $("#product-template-tree-view").hide();
+    	    $('#product-template-table').DataTable({
+        	    dom:"lfritBp",
+        	    buttons:[
+            	    {extend:"csv",className:"btn-sm"},
+            	    {extend:"excel",className:"btn-sm"},
+            	    {extend:"pdfHtml5",className:"btn-sm"},
+            	    {extend:"print",className:"btn-sm"}],
+            	responsive:!0,
+            });
+    		$('#sale-order-table').DataTable({
+        	    dom:"lfritBp",
+        	    buttons:[
+            	    {extend:"csv",className:"btn-sm"},
+            	    {extend:"excel",className:"btn-sm"},
+            	    {extend:"pdfHtml5",className:"btn-sm"},
+            	    {extend:"print",className:"btn-sm"}],
+            	responsive:!0,
+            });
     	});
 	</script>
     	
@@ -253,6 +313,8 @@
         	    $("#product-template-form-view[mode='read']").show();
         	    $("#product-template-form-view[mode='create-edit']").hide();        	    
         	    $("#product-template-tree-view").hide();
+        	    $("#sale-order-tree-view").hide();
+        	    $("#sale-order-form-view").hide();
         	});
     	</script>
     <?php 
@@ -261,23 +323,49 @@
              	<script type="text/javascript">
                 	$(document).ready(function(){
                 	    $("#product-template-form-view[mode='create-edit']").show();
+                	    $("#sale-order-tree-view").hide();
+                	    $("#sale-order-form-view").hide();
                 	    $("#product-template-form-view[mode='read']").hide();
                 	    $("#product-template-tree-view").hide();
                 	});
             	</script>
     <?php             
               }
-          }elseif($_GET['view_type'] == 'tree-view'){
+          }elseif($_GET['view_type'] == 'form-view' && $_GET['model'] == 'sale_order'){
+    ?>
+    	<script type="text/javascript">
+        	$(document).ready(function(){
+				$("#sale-order-form-view").show();
+        	    $("#sale-order-tree-view").hide();
+        	    $("#product-template-form-view[mode='read']").hide();
+        	    $("#product-template-form-view[mode='create-edit']").hide();        	    
+        	    $("#product-template-tree-view").hide();
+        	});
+    	</script>
+    <?php }elseif($_GET['view_type'] == 'tree-view' && $_GET['model'] == 'product_template'){
     ?>
     	<script type="text/javascript">
         	$(document).ready(function(){
         	    $("#product-template-tree-view").show();
+        	    $("#sale-order-tree-view").hide();
+        	    $("#sale-order-form-view").hide();
         	    $("#product-template-form-view[mode='read']").hide();
         	    $("#product-template-form-view[mode='create-edit']").hide();
         	});
     	</script>
     <?php
-          }
+          }elseif($_GET['view_type'] == 'tree-view' && $_GET['model'] == 'sale_order'){
+    ?>
+    	<script type="text/javascript">
+        	$(document).ready(function(){
+        		$("#sale-order-tree-view").show();
+        		$("#sale-order-form-view").hide();
+        	    $("#product-template-tree-view").hide();
+        	    $("#product-template-form-view[mode='read']").hide();
+        	    $("#product-template-form-view[mode='create-edit']").hide();
+        	});
+    	</script>
+    <?php }
       }
     ?>
     
@@ -286,8 +374,14 @@
     	    $("#save").click(function(){        
         	    $("#product-form-button-submit").click();
     	    });
-    	    $("#delete_multi").click(function(){        
-        	    $("#product-tree-button-submit").click();
+    	    $("#action_delete").click(function(){        
+        	    $("#product-tree-button-submit[name='submit-delete']").click();
+    	    });
+    	    $("#action_published").click(function(){       
+        	    $("#product-tree-button-submit[name='submit-pubslihed']").click();
+    	    });
+    	    $("#action_unpublished").click(function(){        
+        	    $("#product-tree-button-submit[name='submit-unpublished']").click();
     	    });
     	});
 	    function readURL(input) {

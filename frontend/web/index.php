@@ -1,3 +1,13 @@
+<?php 
+    $user = "root";
+    $pass = "";
+    $db = "fashion_club";
+    $host = "localhost";
+    
+    include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/models/koneksi.php");
+    
+    $connected = connect_to_db($host, $user, $pass, $db);
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -16,6 +26,7 @@
 		<link rel="stylesheet" href="../static/src/css/bootstrap.css" type="text/css" media="all" />
 		<link rel="stylesheet" href="../static/src/css/style.css" type="text/css" media="all" />
 		<link rel="stylesheet" href="../static/src/css/font-awesome.min.css" type="text/css" media="all"/>
+		<link rel="stylesheet" href="../static/src/css/flexslider.css" type="text/css" media="screen" />
 		<!-- //css -->
 
 		<!-- font -->
@@ -26,6 +37,20 @@
 		<!-- JS Source -->
 		<script src="../static/src/js/jquery-1.11.1.min.js"></script>
 		<script src="../static/src/js/bootstrap.js"></script>
+		<script defer src="../static/src/js/jquery.flexslider.js"></script>
+		<!-- //JS Source -->
+		<script>
+			// Can also be used with $(document).ready()
+			$(window).load(function() {
+			  $('.flexslider').flexslider({
+				animation: "slide",
+				controlNav: "thumbnails"
+			  });
+			});
+		</script>
+		<!--flex slider-->
+		
+		<script src="../static/src/js/imagezoom.js"></script>
 		<!-- //JS Source -->
 	</head>
 	<body>
@@ -59,15 +84,15 @@
         								<div class="row">
         									<div class="col-sm-4">
         										<ul class="multi-column-dropdown">
-        											<li><a href="../lesson_web_mobile/content/wanita/baju/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Pakaian</a></li>
-        											<li><a href="../lesson_web_mobile/content/wanita/sepatu/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Sepatu</a></li>
-        											<li><a href="../lesson_web_mobile/content/wanita/jam_tangan/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Jam Tangan</a></li>
-        											<li><a href="../lesson_web_mobile/content/wanita/aksesoris/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Aksesoris</a></li>
-        											<li><a href="../lesson_web_mobile/content/wanita/tas/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Tas</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=2"><i class="fa fa-angle-right" aria-hidden="true"></i>Pakaian</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=3"><i class="fa fa-angle-right" aria-hidden="true"></i>Sepatu</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=4"><i class="fa fa-angle-right" aria-hidden="true"></i>Jam Tangan</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=5"><i class="fa fa-angle-right" aria-hidden="true"></i>Aksesoris</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=6"><i class="fa fa-angle-right" aria-hidden="true"></i>Tas</a></li>
         										</ul>
         									</div>
         									<div class="col-sm-4 w3l">
-        										<a href="../lesson_web_mobile/content/wanita/baju/index.php"><img src="../lesson_web_mobile/static/src/images/menu1.jpg" class="img-responsive" alt=""></a>
+        										<a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=1"><img src="../static/src/images/menu1.jpg" class="img-responsive" alt=""></a>
         									</div>
         									<div class="clearfix"></div>
         								</div>
@@ -79,15 +104,15 @@
         								<div class="row">
         									<div class="col-sm-4">
         										<ul class="multi-column-dropdown">
-        											<li><a href="../lesson_web_mobile/content/pria/baju/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Pakaian</a></li>
-        											<li><a href="../lesson_web_mobile/content/pria/sepatu/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Sepatu</a></li>
-        											<li><a href="../lesson_web_mobile/content/pria/jam_tangan/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Jam Tangan</a></li>
-        											<li><a href="../lesson_web_mobile/content/pria/aksesoris/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Aksesoris</a></li>
-        											<li><a href="../lesson_web_mobile/content/pria/tas/index.php"><i class="fa fa-angle-right" aria-hidden="true"></i>Tas</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=6"><i class="fa fa-angle-right" aria-hidden="true"></i>Pakaian</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=7"><i class="fa fa-angle-right" aria-hidden="true"></i>Sepatu</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=8"><i class="fa fa-angle-right" aria-hidden="true"></i>Jam Tangan</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=9"><i class="fa fa-angle-right" aria-hidden="true"></i>Aksesoris</a></li>
+        											<li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=10"><i class="fa fa-angle-right" aria-hidden="true"></i>Tas</a></li>
         										</ul>
         									</div>
         									<div class="col-sm-4 w3l">
-        										<a href="../lesson_web_mobile/content/pria/baju/index.php"><img src="../lesson_web_mobile/static/src/images/menu3.jpg" class="img-responsive" alt=""></a>
+        										<a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=6"><img src="../static/src/images/menu3.jpg" class="img-responsive" alt=""></a>
         									</div>
         									<div class="clearfix"></div>
         								</div>
@@ -148,106 +173,44 @@
             	<script type="text/javascript">
                 	$(document).ready(function(){
                 	    $("#product-template-website-kanban-view[mode='read']").show();
-                	    $("#product-template-website-form-view[mode='read']").hide();        	    
+                	    $("#product-template-website-form-view[mode='read']").hide();       	    
                 	    $("#product-template-website-main-view").hide();
+                	});
+            	</script>
+        <?php 
+              }elseif($_GET['view_type'] == 'form-view' && $_GET['model'] == 'product_template'){
+        ?>
+            	<script type="text/javascript">
+                	$(document).ready(function(){
+                	    $("#product-template-website-kanban-view[mode='read']").hide();
+                	    $("#product-template-website-form-view[mode='read']").show();        	    
+                		$("#product-template-website-main-view[mode='read']").hide();
                 	});
             	</script>
         <?php 
               }elseif($_GET['view_type'] == 'main-view'){
         ?>
+            	<script type="text/javascript">
+                	$(document).ready(function(){
+                	    $("#product-template-website-kanban-view[mode='read']").hide();
+                	    $("#product-template-website-form-view[mode='read']").hide();        	    
+                		$("#product-template-website-main-view[mode='read']").show();
+                	});
+            	</script>
+        <?php
+              }
+          }else{
+        ?>
         	<script type="text/javascript">
             	$(document).ready(function(){
             	    $("#product-template-website-kanban-view[mode='read']").hide();
             	    $("#product-template-website-form-view[mode='read']").hide();        	    
-            	    $("#product-template-website-main-view").show();
+            	    $("#product-template-website-main-view[mode='read']").show();
             	});
         	</script>
         <?php
-              }
           }
         ?>
-
-        <script src="js/easyResponsiveTabs.js" type="text/javascript"></script>
-        <script type="text/javascript">
-        	$(document).ready(function () {
-        		$('#horizontalTab').easyResponsiveTabs({
-        			type: 'default', //Types: default, vertical, accordion           
-        			width: 'auto', //auto or any width like 600px
-        			fit: true   // 100% fit in a container
-        		});
-        	});
-        </script>
-        <div class="fandt">
-        	<div class="container">
-        		<div class="col-md-6 features">
-        			<h3>Layanan Kami</h3>
-        			<div class="support">
-        				<div class="col-md-2 ficon hvr-rectangle-out">
-        					<i class="fa fa-user " aria-hidden="true"></i>
-        				</div>
-        				<div class="col-md-10 ftext">
-        					<h4>24/7 online free support</h4>
-        					<p>Free Support untuk anda dalam 24 Jam selama 7 Hari Kerja.</p>
-        				</div>
-        				<div class="clearfix"></div>
-        			</div>
-        			<div class="shipping">
-        				<div class="col-md-2 ficon hvr-rectangle-out">
-        					<i class="fa fa-bus" aria-hidden="true"></i>
-        				</div>
-        				<div class="col-md-10 ftext">
-        					<h4>Free shipping</h4>
-        					<p>Bebas Belanja dengan Harga yang terjangkau, Cepat dalam Pengiriman bebas ongkos kirim.</p>
-        				</div>	
-        				<div class="clearfix"></div>
-        			</div>
-        			<div class="money-back">
-        				<div class="col-md-2 ficon hvr-rectangle-out">
-        					<i class="fa fa-money" aria-hidden="true"></i>
-        				</div>
-        				<div class="col-md-10 ftext">
-        					<h4>100% money back</h4>
-        					<p>Sampaikan keluhan atau return barang apabila tidak sesuai dengan pemesanan dan 100% Uang kembali untuk Anda.</p>
-        				</div>	
-        				<div class="clearfix"></div>				
-        			</div>
-        		</div>
-        		<div class="col-md-6 testimonials">
-        			<div class="test-inner">
-        				<div class="wmuSlider testimonial_slide_id animated wow slideInUp" data-wow-delay=".5s">
-        					<div class="wmuSliderWrapper">
-        						<article style="position: absolute; width: 100%; opacity: 0;"> 
-        							<div class="banner-wrap">
-        								<img src="../lesson_web_mobile/static/src/images/c1.png" alt=" " class="img-responsive" />
-        								<p>Harga yang sangat terjangkau dan proses pengiriman yang sangat cepat.</p>
-        								<h4># Andrew</h4>
-        							</div>
-        						</article>
-        						<article style="position: absolute; width: 100%; opacity: 0;"> 
-        							<div class="banner-wrap">
-        								<img src="../lesson_web_mobile/static/src/images/c2.png" alt=" " class="img-responsive" />
-        								<p>Ramah sekali pelayanan nya, dan Barang nya Oke banget sist.</p>
-        								<h4># Lucy</h4>
-        							</div>
-        						</article>
-        						<article style="position: absolute; width: 100%; opacity: 0;">
-        							<div class="banner-wrap">
-        								<img src="../lesson_web_mobile/static/src/images/c3.png" alt=" " class="img-responsive" />
-        								<p>Belanja disini ok banget, sangat rekomended. Produk lokal yang berkualitas Internasional tentu dengan harga yang terjangkau tetapi dapat kualitas yang sangat mumpuni.</p>
-        								<h4># Martina</h4>
-        							</div>
-        						</article>
-        					</div>
-        				</div>
-        			</div>
-        		</div>
-        		<div class="clearfix"></div>
-        	</div>
-        	<script src="../lesson_web_mobile/static/src/js/jquery.wmuSlider.js"></script> 
-        	<script>
-        		$('.testimonial_slide_id').wmuSlider();         
-        	</script> 
-        </div>
 
         <!-- newsletter -->
         <div class="newsletter">
@@ -313,7 +276,7 @@
         <!-- //Footer -->
         
         <!-- cart-js -->
-        <script src="../lesson_web_mobile/static/src/js/minicart.js"></script>
+        <script src="../static/src/js/minicart.js"></script>
         <script>
            w3ls1.render();
         

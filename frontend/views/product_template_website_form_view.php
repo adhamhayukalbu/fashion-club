@@ -1,30 +1,46 @@
+<?php 
+    if(isset($_GET['mode'])){
+        $mode = $_GET['mode'];
+    }
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
+        $query = mysqli_query($connected, "SELECT * FROM product_template WHERE id='$id'") or die(mysqli_error($connected));
+    
+        if(mysqli_num_rows($query) == 0){
+            echo '<script>window.history.back()</script>';
+        }else{
+            $data = mysqli_fetch_assoc($query);
+        }
+        mysqli_close($connected);
+    }
+?>
 <div id="product-template-website-form-view" mode="read">
     <div class="products">	 
     	<div class="container">  
     		<div class="single-page">
     			<ol class="breadcrumb">
-    			  <li><a href="../../../index.php">Home</a></li>
-    			  <li><a href="../../../content/wanita/baju/index.php">Pakaian Wanita</a></li>
-    			  <li class="active">Dress</li>
+    			  <li><a href="index.php">Home</a></li>
+    			  <li><a href="index.php?mode=read&view_type=kanban-view&model=product_template&categ_id=2">Pakaian Wanita</a></li>
+    			  <li class="active"><?php echo $data['name'];?></li>
     			</ol>
     			<div class="single-page-row" id="detail-21">
     				<div class="col-md-6 single-top-left">	
     					<div class="flexslider">
     						<ul class="slides">
-    							<li data-thumb="../../../static/src/images/wanita1_1.jpg">
-    								<div class="thumb-image detail_images"> <img src="../../../static/src/images/wanita1_1.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+    							<li data-thumb="../static/src/images/<?php echo $data['optional_image_2'];?>">
+    								<div class="thumb-image detail_images"> <img src="../static/src/images/<?php echo $data['optional_image_2'];?>" data-imagezoom="true" class="img-responsive" alt=""> </div>
     							</li>
-    							<li data-thumb="../../../static/src/images/wanita1_1.jpg">
-    								 <div class="thumb-image"> <img src="../../../static/src/images/wanita1_1.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+    							<li data-thumb="../static/src/images/<?php echo $data['optional_image_3'];?>">
+    								 <div class="thumb-image"> <img src="../static/src/images/<?php echo $data['optional_image_3'];?>" data-imagezoom="true" class="img-responsive" alt=""> </div>
     							</li>
-    							<li data-thumb="../../../static/src/images/wanita1_2.jpg">
-    							   <div class="thumb-image"> <img src="../../../static/src/images/wanita1_2.jpg" data-imagezoom="true" class="img-responsive" alt=""> </div>
+    							<li data-thumb="../static/src/images/<?php echo $data['optional_image_4'];?>">
+    							   <div class="thumb-image"> <img src="../static/src/images/<?php echo $data['optional_image_4'];?>" data-imagezoom="true" class="img-responsive" alt=""> </div>
     							</li> 
     						</ul>
     					</div>
     				</div>
     				<div class="col-md-6 single-top-right">
-    					<h3 class="item_name">Dress</h3>
+    					<h3 class="item_name"><?php echo $data['name'];?></h3>
     					<p>Estimasi Pengiriman : Di area Semarang 1-2 Hari Kerja, Di luar Semarang 3 - 5 Hari Kerja. </p>
     					<div class="single-rating">
     						<ul>
@@ -39,7 +55,7 @@
     					</div>
     					<div class="single-price">
     						<ul>
-    							<li>Rp. 160,000</li>
+    							<li><?php echo 'Rp. '.number_format($data['list_price'], 0).'';?></li>
     							<li><a href="#"><i class="fa fa-gift" aria-hidden="true"></i> Coupon</a></li>
     						</ul>	
     					</div> 
@@ -47,8 +63,8 @@
     					<form action="#" method="post">
     						<input type="hidden" name="cmd" value="_cart" />
     						<input type="hidden" name="add" value="1" /> 
-    						<input type="hidden" name="w3ls1_item" value="Zalia - Ombre Flare Sleeve Dress" /> 
-    						<input type="hidden" name="amount" value="540.00" /> 
+    						<input type="hidden" name="w3ls1_item" value="<?php echo $data['name']?>" /> 
+    						<input type="hidden" name="amount" value="<?php echo $data['list_price']?>" /> 
     						<button type="submit" class="w3ls-cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
     					</form>
     					<button class="w3ls-cart w3ls-cart-like"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</button>
@@ -71,7 +87,7 @@
               			<div class="row">
               				<div class="col-md-12">
     							<p>
-    								<b>SKU (simple)</b> : B71C3AA523F13FGS<br/>
+    								<b>SKU (simple)</b> : <?php echo $data['default_code']?><br/>
     								<b>Warna</b> : 	Pastel Ombre<br/>
     								<b>Petunjuk Perawatan</b> : Cuci dengan mesin air hangat, Hindari pemutih, Jangan dikeringkan dimesin, Jangan disterika, Hindari dry clean<br/><br/>
     							</p>
