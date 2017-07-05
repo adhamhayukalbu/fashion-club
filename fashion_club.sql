@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 21, 2017 at 05:56 PM
+-- Generation Time: Jul 05, 2017 at 02:23 PM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -72,16 +72,22 @@ CREATE TABLE `product_template` (
   `active` tinyint(1) DEFAULT '1',
   `website_published` tinyint(1) DEFAULT '0',
   `default_code` varchar(15) DEFAULT NULL,
-  `image` text NOT NULL
+  `image` text NOT NULL,
+  `optional_image_2` text NOT NULL,
+  `optional_image_3` text NOT NULL,
+  `optional_image_4` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `product_template`
 --
 
-INSERT INTO `product_template` (`id`, `create_uid`, `create_date`, `write_uid`, `write_date`, `name`, `display_name`, `list_price`, `standard_price`, `categ_id`, `sale_ok`, `purchase_ok`, `description_sale`, `product_type_id`, `uom_id`, `active`, `website_published`, `default_code`, `image`) VALUES
-(1, 1, '2017-06-21 21:54:52', 1, '2017-06-21 21:54:52', 'Pink Dress', 'Pink Dress', 187000, 125000, 1, 1, 1, '', 1, NULL, 1, 1, 'B71C3AA523F13FG', 'wanita1.jpg'),
-(2, 1, '2017-06-21 21:55:27', NULL, '2017-06-21 21:55:27', 'Simple Elegant Dress', NULL, 245000, 200000, 1, 1, 1, '', 1, NULL, 1, 1, 'B71C3AA523F14HZ', 'wanita5.jpg');
+INSERT INTO `product_template` (`id`, `create_uid`, `create_date`, `write_uid`, `write_date`, `name`, `display_name`, `list_price`, `standard_price`, `categ_id`, `sale_ok`, `purchase_ok`, `description_sale`, `product_type_id`, `uom_id`, `active`, `website_published`, `default_code`, `image`, `optional_image_2`, `optional_image_3`, `optional_image_4`) VALUES
+(1, 1, '2017-07-04 22:45:06', 1, '2017-07-04 22:45:06', 'Pink Dress', 'Pink Dress', 187000, 125000, 2, 1, 1, '', 1, NULL, 1, 1, 'B71C3AA523F13FG', 'wanita1.jpg', 'wanita1_1.jpg', 'wanita1_2.jpg', 'wanita1_3.jpg'),
+(2, 1, '2017-07-04 22:45:06', NULL, '2017-07-04 22:45:06', 'Simple Elegant Dress', NULL, 245000, 200000, 2, 1, 1, '', 1, NULL, 1, 1, 'B71C3AA523F14HZ', 'wanita5.jpg', 'wanita5_1.jpg', 'wanita5_2.jpg', 'wanita5_3.jpg'),
+(3, 1, '2017-07-05 09:03:59', NULL, '2017-07-05 09:03:59', 'Perfect Blue Boutique', NULL, 175000, 150000, 2, 1, 1, '', 1, NULL, 1, 1, 'B71C3AA523F14MG', 'wanita4.jpg', 'wanita4_1.jpg', 'wanita4_2.jpg', 'wanita4_3.jpg'),
+(4, 1, '2017-07-05 09:05:20', NULL, '2017-07-05 09:05:20', 'Blue Strip Dress', NULL, 167000, 125000, 2, 1, 1, '', 1, NULL, 1, 1, 'B71C3AA523F14TY', 'wanita3.jpg', 'wanita3_1.jpg', 'wanita3_2.jpg', 'wanita3_3.jpg'),
+(5, 1, NULL, NULL, NULL, 'Dress', NULL, 150000, 120000, 2, 1, 1, '', 1, NULL, 1, 1, 'R321', 'wanita6.jpg', 'wanita6_1.jpg', 'wanita6_2.jpg', 'wanita6_3.jpg');
 
 -- --------------------------------------------------------
 
@@ -127,6 +133,54 @@ CREATE TABLE `res_user` (
 INSERT INTO `res_user` (`id`, `login`, `password`, `is_public`) VALUES
 (1, 'admin@fashion_club.com', '1', 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_order`
+--
+
+CREATE TABLE `sale_order` (
+  `id` int(5) NOT NULL,
+  `name` varchar(15) NOT NULL,
+  `order_date` datetime NOT NULL,
+  `partner_name` varchar(15) NOT NULL,
+  `partner_address` varchar(50) NOT NULL,
+  `partner_phone` varchar(12) NOT NULL,
+  `partner_email` varchar(20) NOT NULL,
+  `amount_untaxed` float NOT NULL,
+  `amount_tax` float NOT NULL,
+  `amount_total` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sale_order`
+--
+
+INSERT INTO `sale_order` (`id`, `name`, `order_date`, `partner_name`, `partner_address`, `partner_phone`, `partner_email`, `amount_untaxed`, `amount_tax`, `amount_total`) VALUES
+(1, 'SO/17/0001', '2017-07-05 10:00:00', 'Testing', 'Testing Address', '0123456789', 'testing@email.com', 510000, 51000, 561000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_order_line`
+--
+
+CREATE TABLE `sale_order_line` (
+  `id` int(5) NOT NULL,
+  `order_id` int(5) NOT NULL,
+  `product_id` int(5) NOT NULL,
+  `qty_ordered` float NOT NULL,
+  `price_unit` float NOT NULL,
+  `amount_untaxed` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sale_order_line`
+--
+
+INSERT INTO `sale_order_line` (`id`, `order_id`, `product_id`, `qty_ordered`, `price_unit`, `amount_untaxed`) VALUES
+(1, 1, 1, 3, 187000, 510000);
+
 --
 -- Indexes for dumped tables
 --
@@ -165,6 +219,20 @@ ALTER TABLE `res_user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sale_order`
+--
+ALTER TABLE `sale_order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sale_order_line`
+--
+ALTER TABLE `sale_order_line`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sale_order_line_ibfk_1` (`order_id`),
+  ADD KEY `sale_order_line_ibfk_2` (`product_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -177,7 +245,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_template`
 --
 ALTER TABLE `product_template`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `product_type`
 --
@@ -188,6 +256,16 @@ ALTER TABLE `product_type`
 --
 ALTER TABLE `res_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `sale_order`
+--
+ALTER TABLE `sale_order`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `sale_order_line`
+--
+ALTER TABLE `sale_order_line`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
@@ -206,6 +284,13 @@ ALTER TABLE `product_category`
 ALTER TABLE `product_type`
   ADD CONSTRAINT `product_type_ibfk_1` FOREIGN KEY (`create_uid`) REFERENCES `res_user` (`id`),
   ADD CONSTRAINT `product_type_ibfk_2` FOREIGN KEY (`write_uid`) REFERENCES `res_user` (`id`);
+
+--
+-- Constraints for table `sale_order_line`
+--
+ALTER TABLE `sale_order_line`
+  ADD CONSTRAINT `sale_order_line_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `sale_order` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  ADD CONSTRAINT `sale_order_line_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product_template` (`id`) ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
