@@ -280,7 +280,7 @@
     	$(document).ready(function(){
     	    $("#product-template-form-view[mode='read']").hide();
     	    $("#product-template-form-view[mode='create-edit']").hide();
-//     	    $("#sale-order-tree-view").hide();
+    	    $("#sale-order-form-view").hide();
     	    $("#product-template-tree-view").hide();
     	    $('#product-template-table').DataTable({
         	    dom:"lfritBp",

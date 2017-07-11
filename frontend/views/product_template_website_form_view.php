@@ -61,13 +61,16 @@
     					</div> 
     					<p class="single-price-text">Harga Terjangkau, Barang Berkualitas.</p>
     					<form action="#" method="post">
-    						<input type="hidden" name="cmd" value="_cart" />
+    						<input type="hidden" name="cmd" value="_cart"/>
     						<input type="hidden" name="add" value="1" /> 
     						<input type="hidden" name="w3ls1_item" value="<?php echo $data['name']?>" /> 
     						<input type="hidden" name="amount" value="<?php echo $data['list_price']?>" /> 
-    						<button type="submit" class="w3ls-cart" ><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
+    						<button style="display:none;" class="w3ls-cart" type="submit"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>
     					</form>
-    					<button class="w3ls-cart w3ls-cart-like"><i class="fa fa-heart-o" aria-hidden="true"></i> Add to Wishlist</button>
+    					<form action="index.php?mode=cart-session&view_type=tree-view&model=product_template&cart=add&id=<?php echo $id;?>" method="post">
+     						<input type="hidden" name="qty_ordered" value="1"/>
+     						<button class="w3ls-cart" name="action_order" type="submit"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to cart</button>   					
+    					</form>
     				</div>
     			   <div class="clearfix"> </div>  
     			</div>

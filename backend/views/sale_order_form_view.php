@@ -60,7 +60,7 @@
               <div class="row invoice-info">
                 <!-- /.col -->
                 <div class="col-sm-8 invoice-col">
-                  <strong>Customer :</strong><?php echo $data['partner_name'];?>
+                  <strong>Customer : </strong><?php echo $data['partner_name'];?>
                   <br/><b>Customer Phone : </b><?php echo $data['partner_phone'];?>
                 </div>
                 <!-- /.col -->

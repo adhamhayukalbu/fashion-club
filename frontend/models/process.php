@@ -5,61 +5,33 @@
             echo '<script>window.history.back()</script>';
         }
         else{
-            if ($models == 'product_template'){
-                /* List Fields */
-                $sale_ok = $_POST['sale_ok'] == 'on' ? 1 : 0;
-                $purchase_ok = $_POST['purchase_ok'] == 'on' ? 1 : 0;
-                $website_published = $_POST['website_published'] == 'on' ? 1 : 0;
-                $name = $_POST['name'];
-                $list_price = $_POST['list_price'];
-                $standard_price = $_POST['standard_price'];
-                $categ_id = $_POST['categ_id'];
-                $product_type_id = $_POST['product_type_id'];
-                $default_code = $_POST['default_code'];
-                $description_sale = $_POST['description_sale'];
-                $description_picking = $_POST['description_picking'];
-                $images = $_FILES['uploaded-file']['name'];
-                $sql = "INSERT INTO product_template VALUES (NULL, 1, NULL, NULL, NULL, '$name', NULL, '$list_price', '$standard_price', '$categ_id', '$sale_ok', '$purchase_ok', '$description_sale', '$product_type_id', NULL, 1, '$website_published', '$default_code', '$images')";
+            if ($models == 'sale_order'){
+                /* List Fields */                
+                $amount_untaxed = $_SESSION['order']['amount_untaxed'];
+                $amount_tax = $_SESSION['order']['amount_tax'];
+                $amount_total = $_SESSION['order']['amount_total'];
+                $partner_name = $_POST['partner_name'];
+                $partner_phone = $_POST['partner_phone'];
+                $partner_address = $_POST['partner_address'];
+                $partner_email = $_POST['partner_email'];
+                $order_date = date("Y-m-d H:i:s");
+                $sql = "INSERT INTO sale_order VALUES (NULL, NULL, '$order_date', '$partner_name', '$partner_address', '$partner_phone', '$partner_email', '$amount_untaxed', '$amount_tax', '$amount_total')";
                 $result = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
-            }
-        }
-    }
-
-    function write($id, $models, $koneksi){
-        $sql = '';
-        if (!$models){
-            echo '<script>window.history.back()</script>';
-        }
-        else{
-            if ($models == 'product_template'){
-                /* List Fields */
-                $sale_ok = $_POST['sale_ok'] == 'on' ? 1 : 0;
-                $purchase_ok = $_POST['purchase_ok'] == 'on' ? 1 : 0;
-                $website_published = $_POST['website_published'] == 'on' ? 1 : 0;
-                $name = $_POST['name'];
-                $list_price = $_POST['list_price'];
-                $standard_price = $_POST['standard_price'];
-                $categ_id = $_POST['categ_id'];
-                $product_type_id = $_POST['product_type_id'];
-                $default_code = $_POST['default_code'];
-                $description_sale = $_POST['description_sale'];
-                $description_picking = $_POST['description_picking'];
-                $images = $_FILES['uploaded-file']['name'];
-
-                $sql = "UPDATE product_template SET name='$name', list_price='$list_price', standard_price='$standard_price', categ_id='$categ_id', product_type_id='$product_type_id', sale_ok='$sale_ok', purchase_ok='$purchase_ok', description_sale='$description_sale', website_published='$website_published', default_code='$default_code', image='$images' WHERE id='$id'";
+                $order_id = mysqli_insert_id($koneksi);
+                $order_ref = "SO/17/000".$order_id;
+                $sql = "UPDATE sale_order SET name='$order_ref' WHERE id='$order_id'";
                 $result = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
-            }
-        }
-    }
 
-    function delete($id, $models, $koneksi){
-        $sql = '';
-        if (!$models){
-            echo '<script>window.history.back()</script>';
-        }
-        else{
-            $sql = 'DELETE FROM '.$models.' WHERE id='.$id.'';
-            $result = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
+                foreach ($_SESSION["cart_item"] as $item){
+                    $product_id = $item['id'];
+                    $qty_ordered = $item['qty_ordered'];
+                    $price_unit = $item['list_price'];
+                    $line_amount_untaxed = $item['amount_untaxed'];
+                    $line_amount_tax = $item['amount_tax'];
+                    $sql = "INSERT INTO sale_order_line VALUES (NULL, '$order_id', '$product_id', '$qty_ordered', '$price_unit', '$line_amount_untaxed', '$line_amount_tax')";
+                    $result = mysqli_query($koneksi, $sql) or die(mysqli_error($koneksi));
+                }
+            }
         }
     }
 ?>

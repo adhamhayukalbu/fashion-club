@@ -1,4 +1,5 @@
-<?php 
+<?php
+    session_start();
     $user = "root";
     $pass = "";
     $db = "fashion_club";
@@ -7,6 +8,14 @@
     include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/models/koneksi.php");
     
     $connected = connect_to_db($host, $user, $pass, $db);
+
+    if(isset($_POST['submit-order'])){
+        include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/models/process.php");
+        $model = 'sale_order';
+        create($model, $connected);
+        unset($_SESSION["cart_item"]);
+        unset($_SESSION["order"]);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,10 +173,12 @@
             include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/views/product_template_website_main_view.php");
             include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/views/product_template_website_kanban_view.php");
             include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/views/product_template_website_form_view.php");
+            include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/views/product_template_website_cart_view.php");
+            include($_SERVER['DOCUMENT_ROOT'] . "/fashion-club/frontend/views/product_template_website_checkout_view.php");    
         ?>
 
         <?php
-          if(isset($_GET['view_type'], $_GET['model'])){
+          if(isset($_GET['view_type'], $_GET['model'], $_GET['mode'])){
               if($_GET['view_type'] == 'kanban-view' && $_GET['model'] == 'product_template'){
         ?>
             	<script type="text/javascript">
@@ -175,6 +186,8 @@
                 	    $("#product-template-website-kanban-view[mode='read']").show();
                 	    $("#product-template-website-form-view[mode='read']").hide();       	    
                 	    $("#product-template-website-main-view").hide();
+                	    $("#product-template-website-cart-view[mode='read']").hide();
+                	    $("#product-template-website-checkout-view[mode='read']").hide();
                 	});
             	</script>
         <?php 
@@ -183,8 +196,10 @@
             	<script type="text/javascript">
                 	$(document).ready(function(){
                 	    $("#product-template-website-kanban-view[mode='read']").hide();
-                	    $("#product-template-website-form-view[mode='read']").show();        	    
+                	    $("#product-template-website-form-view[mode='read']").show();
+                	    $("#product-template-website-cart-view[mode='read']").hide();      	    
                 		$("#product-template-website-main-view[mode='read']").hide();
+                		$("#product-template-website-checkout-view[mode='read']").hide();
                 	});
             	</script>
         <?php 
@@ -193,11 +208,38 @@
             	<script type="text/javascript">
                 	$(document).ready(function(){
                 	    $("#product-template-website-kanban-view[mode='read']").hide();
-                	    $("#product-template-website-form-view[mode='read']").hide();        	    
+                	    $("#product-template-website-form-view[mode='read']").hide();
+                	    $("#product-template-website-cart-view[mode='read']").hide();   	    
                 		$("#product-template-website-main-view[mode='read']").show();
+                		$("#product-template-website-checkout-view[mode='read']").hide();
                 	});
             	</script>
         <?php
+              }elseif($_GET['view_type'] == 'tree-view'){
+                  if($_GET['mode'] == 'cart-session'){
+        ?>
+            	<script type="text/javascript">
+                	$(document).ready(function(){
+                	    $("#product-template-website-kanban-view[mode='read']").hide();
+                	    $("#product-template-website-form-view[mode='read']").hide();
+                	    $("#product-template-website-cart-view[mode='read']").show();        	    
+                		$("#product-template-website-main-view[mode='read']").hide();
+                		$("#product-template-website-checkout-view[mode='read']").hide();
+                	});
+            	</script>
+        <?php
+                  }else{
+        ?>          
+            	<script type="text/javascript">
+                	$(document).ready(function(){
+                	    $("#product-template-website-kanban-view[mode='read']").hide();
+                	    $("#product-template-website-form-view[mode='read']").hide();
+                	    $("#product-template-website-cart-view[mode='read']").hide();        	    
+                		$("#product-template-website-main-view[mode='read']").hide();
+                		$("#product-template-website-checkout-view[mode='read']").show();
+                	});
+            	</script>        			
+        <?php     }
               }
           }else{
         ?>
@@ -206,6 +248,8 @@
             	    $("#product-template-website-kanban-view[mode='read']").hide();
             	    $("#product-template-website-form-view[mode='read']").hide();        	    
             	    $("#product-template-website-main-view[mode='read']").show();
+            	    $("#product-template-website-cart-view[mode='read']").hide();
+            		$("#product-template-website-checkout-view[mode='read']").hide();
             	});
         	</script>
         <?php
